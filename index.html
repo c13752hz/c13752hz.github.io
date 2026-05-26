@@ -121,6 +121,8 @@
       width: 220px; height: 220px;
       border-radius: 50%;
       overflow: hidden;
+      object-fit: cover;
+      object-position: top;
       background: linear-gradient(135deg, #f4b6f0 0%, #b509ac 100%);
       display: flex; align-items: center; justify-content: center;
       color: white;
@@ -292,67 +294,35 @@
         I am a third-year Computer Science undergraduate at the
         <a href="https://www.ucla.edu/">University of California, Los Angeles (UCLA)</a>,
         currently working as a research assistant at the
-        <a href="https://boleizhou.github.io/">VAIL Lab</a> with
-        <a href="https://boleizhou.github.io/">Prof. Bolei Zhou</a> and at the
-        <a href="https://mobility-lab.seas.ucla.edu/">UCLA Mobility Lab</a> with
-        <a href="https://mobility-lab.seas.ucla.edu/about/">Prof. Jiaqi Ma</a>.
+        <a href="https://vail-ucla.github.io">VAIL Lab</a> with
+        <a href="https://boleizhou.github.io/">Prof. Bolei Zhou</a>.
       </p>
       <p>
-        My research focuses on
-        <strong>end-to-end autonomous driving</strong>,
-        <strong>simulation-to-real evaluation</strong>, and
-        <strong>cooperative perception</strong> for intelligent transportation systems.
-        I am especially interested in bridging the open-loop / closed-loop gap that limits how well learned driving policies transfer from training datasets to deployment-time environments.
+        My current research interest lies in building efficient, scalable, and reliable agentic AI systems.
       </p>
-      <p>
-        Outside research, I work on robotics systems engineering (ROS1/2, LiDAR &amp; camera pipelines), care a lot about clean production-ready code, and enjoy 3D printing, traditional Chinese painting, and classical guitar.
-      </p>
+      
     </div>
     <img src="img/profile.JPG" class="avatar">
   </section>
 
   <section id="news">
-    <h2><a href="#news">news</a></h2>
+    <h2><a href="#news">News</a></h2>
     <table class="news-table">
       <tbody>
-        <tr>
-          <td class="news-date">Apr 22, 2026</td>
-          <td>Submitted <em>BridgeSim: Unveiling the OL-CL Gap in End-to-End Autonomous Driving</em> to <strong>CoRL 2026</strong> as co-author. Owned end-to-end integration of <a href="https://github.com/VAIL-UCLA/BridgeSim">Alpamayo and OpenPilot</a> into the unified model zoo.</td>
-        </tr>
-        <tr>
-          <td class="news-date">Mar 28, 2026</td>
-          <td>Shipped TTC (Time-to-Collision) metric fix and TTC-based trajectory scorers in BridgeSim, supporting fair closed-loop benchmarking across 12+ E2E driving models.</td>
-        </tr>
-        <tr>
-          <td class="news-date">Feb 2026</td>
-          <td>Manuscript <em>RFuse: Query-Based Cross-Voxel Cross-Agent Fusion for Sparse Radar Representations</em> submitted to <strong>Transportation Research Part C</strong> (TRC-26-00024).</td>
-        </tr>
-        <tr>
-          <td class="news-date">Sep 1, 2025</td>
-          <td>Joined the <a href="https://boleizhou.github.io/">VAIL Lab</a> at UCLA as a research assistant working on the BridgeSim closed-loop evaluation platform.</td>
-        </tr>
         <tr>
           <td class="news-date">Aug 2025</td>
           <td>Paper <em>CDA-SimBoost</em> accepted at <strong>IEEE ITSC 2025</strong>.</td>
         </tr>
         <tr>
           <td class="news-date">Jun 2025</td>
-          <td>Selected as a <a href="https://samueli.ucla.edu/">Samueli Research Scholar (SRS)</a> at the UCLA Mobility Lab — building a CARLA → ROS real-time streaming pipeline and a cooperative driving dataset on top of OpenCDA-InfraX.</td>
-        </tr>
-        <tr>
-          <td class="news-date">Jan 2025</td>
-          <td>Joined the UCLA Mobility Lab and the Sensing &amp; Robotics for Infrastructure (SRI) Lab as a research assistant.</td>
-        </tr>
-        <tr>
-          <td class="news-date">2024</td>
-          <td>Named to the <strong>UCLA Dean's Honor List</strong>; GPA 3.940 / 4.000.</td>
+          <td>Honored to be selected as a <a href="https://www.seasoasa.ucla.edu/surp/">Samueli Research Scholar (SRS)</a> at UCLA.</td>
         </tr>
       </tbody>
     </table>
   </section>
 
   <section id="publications">
-    <h2><a href="#publications">selected publications</a></h2>
+    <h2><a href="#publications">Publications</a></h2>
     <ul class="pub-list">
 
       <li class="pub">
@@ -408,47 +378,6 @@
       </li>
 
     </ul>
-  </section>
-
-  <section id="experience">
-    <h2><a href="#experience">research experience</a></h2>
-
-    <div class="exp">
-      <div class="exp-header">
-        <div class="exp-role">Research Assistant, VAIL Lab</div>
-        <div class="exp-date">Sep 2025 – Present</div>
-      </div>
-      <div class="exp-org">UCLA · advised by Prof. Bolei Zhou</div>
-      <p>Developing and integrating a unified model zoo of 12+ end-to-end driving models (UniAD, VAD, TCP, RAP, LEAD, TransFuser, DiffusionDrive, OpenPilot, Alpamayo R1, …) into <a href="https://github.com/VAIL-UCLA/BridgeSim">BridgeSim</a>, a cross-simulator closed-loop evaluation platform. Owned end-to-end integration of OpenPilot and Alpamayo via merged PRs; extended the evaluation framework with TTC metric fixes and TTC-based trajectory scorers; refactored Alpamayo inference for per-frame process reuse.</p>
-    </div>
-
-    <div class="exp">
-      <div class="exp-header">
-        <div class="exp-role">Samueli Research Scholar, Mobility Lab</div>
-        <div class="exp-date">Jun 2025 – Sep 2025</div>
-      </div>
-      <div class="exp-org">UCLA · UCLA SRS Program</div>
-      <p>Designed and implemented a ROS-based real-time streaming pipeline for CARLA simulators via ROS bridge, enabling online ingestion, detection, tracking, and integration of vehicle sensor data. Built a cooperative driving dataset on top of OpenCDA-InfraX with broader multi-modal coverage and more diverse traffic scenarios than existing benchmarks.</p>
-    </div>
-
-    <div class="exp">
-      <div class="exp-header">
-        <div class="exp-role">Research Assistant, Mobility Lab</div>
-        <div class="exp-date">Jan 2025 – Sep 2025</div>
-      </div>
-      <div class="exp-org">UCLA · advised by Prof. Jiaqi Ma</div>
-      <p>Contributed to development and debugging of CDA-SimBoost, a Python framework integrating real-world data with CARLA simulation for cooperative driving research. Built a ROS1 / C++ localization tool for point-cloud matching; authored a ROS1 package for autonomous vehicles with central LiDAR (binary → point cloud → RViz alignment via ground-truth pose), plus a companion node converting sequential YAML bounding-box annotations into RViz Marker/MarkerArray messages with Euler-to-quaternion transforms.</p>
-    </div>
-
-    <div class="exp">
-      <div class="exp-header">
-        <div class="exp-role">Research Assistant, SRI Lab</div>
-        <div class="exp-date">Jan 2025 – Apr 2025</div>
-      </div>
-      <div class="exp-org">UCLA · Sensing &amp; Robotics for Infrastructure</div>
-      <p>Co-developed a robotic system for autonomous field search and environmental analysis in forests, integrating 3D LiDAR, ZED 2 camera, and Impinj R420 reader with ROS2 and the ZED SDK. Wrote ROS nodes in Python for SVO-based YOLO perception (tree / rock counts, terrain type → structured Excel datasets) and live GPS serial parsing (timestamp, coordinates, speed).</p>
-    </div>
-
   </section>
 
   <section id="skills">

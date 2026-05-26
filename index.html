@@ -88,6 +88,19 @@
     }
     .nav-links a.current { border-bottom-color: var(--text); }
     .nav-links a:hover { color: var(--accent); }
+    .nav-divider {
+      width: 1px;
+      height: 1.1rem;
+      background: var(--border);
+      margin: 0 .2rem;
+    }
+    .nav-icon {
+      font-size: 1rem;
+      color: var(--muted);
+      padding: .25rem 0;
+      border-bottom: none !important;
+    }
+    .nav-icon:hover { color: var(--accent) !important; }
     .theme-toggle {
       background: none;
       border: 1px solid var(--border);
@@ -282,6 +295,11 @@
       <a href="#news">news</a>
       <a href="#publications">publications</a>
       <a href="#skills">skills</a>
+      <div class="nav-divider"></div>
+      <a class="nav-icon" href="mailto:c13752hz@g.ucla.edu" title="Email"><i class="fas fa-envelope"></i></a>
+      <a class="nav-icon" href="https://github.com/c13752hz" title="GitHub"><i class="fab fa-github"></i></a>
+      <a class="nav-icon" href="https://www.linkedin.com/in/rebecca-bao-c13752hz" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+      <a class="nav-icon" href="https://scholar.google.com/citations?hl=en&user=8fxsErQAAAAJ" title="Google Scholar"><i class="fas fa-graduation-cap"></i></a>
       <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
         <i class="fas fa-moon"></i>
       </button>

@@ -1,13 +1,534 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <link rel="icon" href="/favicon.ico">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Upload Test</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.js"></script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <title>about | Rebecca (Yuxin) Bao</title>
+  <meta name="author" content="Rebecca (Yuxin) Bao" />
+  <meta name="description" content="Rebecca (Yuxin) Bao is a Computer Science undergraduate at UCLA working on autonomous driving simulation, cooperative perception, and end-to-end driving policy evaluation." />
+  <meta name="keywords" content="Rebecca Bao, Yuxin Bao, UCLA, VAIL Lab, Mobility Lab, autonomous driving, BridgeSim" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Slab:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #1c1c1c;
+      --muted: #6c757d;
+      --accent: #b509ac;
+      --border: #e9ecef;
+      --link: #b509ac;
+      --code-bg: #f6f8fa;
+      --card-shadow: 0 .125rem .25rem rgba(0,0,0,.075);
+    }
+
+    [data-theme="dark"] {
+      --bg: #0d1117;
+      --text: #f5f5f5;
+      --muted: #b0b0b0;
+      --accent: #f4b6f0;
+      --border: #2a2f36;
+      --link: #f4b6f0;
+      --code-bg: #161b22;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: 'Roboto', -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      font-weight: 300;
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: var(--text);
+      background: var(--bg);
+      transition: background .2s ease, color .2s ease;
+    }
+    a { color: var(--link); text-decoration: none; transition: color .15s; }
+    a:hover { color: var(--text); }
+    h1, h2, h3, h4 { font-family: 'Roboto Slab', Georgia, serif; font-weight: 400; color: var(--text); }
+    h1 { font-size: 3.4rem; font-weight: 300; margin: 0 0 .5rem 0; letter-spacing: -1px; }
+    h2 { font-size: 1.6rem; margin: 2.4rem 0 1rem 0; font-weight: 400; }
+    h2 a { color: var(--text); border-bottom: 1px dotted transparent; }
+    h2 a:hover { border-bottom-color: var(--text); }
+
+    /* ---------- NAV ---------- */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+    .nav-brand {
+      font-family: 'Roboto Slab', serif;
+      font-weight: 500;
+      font-size: 1.1rem;
+      color: var(--text);
+    }
+    .nav-brand:hover { color: var(--accent); }
+    .nav-links { display: flex; gap: 1.4rem; align-items: center; flex-wrap: wrap; }
+    .nav-links a {
+      font-size: .98rem;
+      color: var(--text);
+      font-weight: 400;
+      padding: .25rem 0;
+      border-bottom: 1px solid transparent;
+    }
+    .nav-links a.current { border-bottom-color: var(--text); }
+    .nav-links a:hover { color: var(--accent); }
+    .theme-toggle {
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      width: 32px; height: 32px;
+      cursor: pointer;
+      color: var(--text);
+      display: inline-flex; align-items: center; justify-content: center;
+    }
+    .theme-toggle:hover { color: var(--accent); border-color: var(--accent); }
+
+    /* ---------- LAYOUT ---------- */
+    main { max-width: 920px; margin: 0 auto; padding: 3rem 1.5rem 2rem; }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 2.5rem;
+      align-items: start;
+      margin-bottom: 2rem;
+    }
+    .hero-text .tag {
+      color: var(--muted);
+      font-size: .95rem;
+      font-weight: 400;
+      margin-top: -.2rem;
+      margin-bottom: 1.5rem;
+    }
+    .hero-text p { margin: 0 0 1.1rem 0; }
+    .avatar {
+      width: 220px; height: 220px;
+      border-radius: 50%;
+      overflow: hidden;
+      background: linear-gradient(135deg, #f4b6f0 0%, #b509ac 100%);
+      display: flex; align-items: center; justify-content: center;
+      color: white;
+      font-family: 'Roboto Slab', serif;
+      font-size: 4.4rem;
+      font-weight: 300;
+      box-shadow: 0 8px 24px rgba(181, 9, 172, 0.15);
+      letter-spacing: -2px;
+    }
+    @media (max-width: 720px) {
+      .hero { grid-template-columns: 1fr; justify-items: center; text-align: center; }
+      .hero-text { text-align: left; }
+      h1 { font-size: 2.6rem; }
+    }
+
+    /* ---------- NEWS TABLE ---------- */
+    .news-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .96rem;
+    }
+    .news-table td {
+      padding: .8rem .6rem;
+      border-top: 1px solid var(--border);
+      vertical-align: top;
+    }
+    .news-table tr:last-child td { border-bottom: 1px solid var(--border); }
+    .news-date {
+      color: var(--muted);
+      font-family: 'Roboto Slab', serif;
+      font-size: .92rem;
+      white-space: nowrap;
+      width: 140px;
+    }
+
+    /* ---------- PUBLICATIONS ---------- */
+    .pub-list { list-style: none; padding: 0; margin: 0; counter-reset: pub; }
+    .pub {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 1.4rem;
+      padding: 1.4rem 0;
+      border-top: 1px solid var(--border);
+      align-items: start;
+    }
+    .pub:last-child { border-bottom: 1px solid var(--border); }
+    .pub-thumb {
+      width: 140px; height: 90px;
+      border-radius: 4px;
+      overflow: hidden;
+      background: var(--code-bg);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Roboto Slab', serif;
+      font-size: .8rem;
+      color: var(--muted);
+      text-align: center;
+      padding: .4rem;
+      border: 1px solid var(--border);
+    }
+    .pub-thumb.bridgesim { background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%); color: white; font-size: 1rem; }
+    .pub-thumb.cda { background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); color: white; font-size: 1rem; }
+    .pub-thumb.rfuse { background: linear-gradient(135deg, #fc466b 0%, #3f5efb 100%); color: white; font-size: 1rem; }
+    .pub-thumb.live2sim { background: linear-gradient(135deg, #f7971e 0%, #ffd200 100%); color: white; font-size: 1rem; }
+    .pub-venue {
+      display: inline-block;
+      font-size: .75rem;
+      font-weight: 500;
+      letter-spacing: .04em;
+      color: var(--accent);
+      background: rgba(181, 9, 172, .08);
+      padding: .12rem .55rem;
+      border-radius: 3px;
+      margin-bottom: .4rem;
+    }
+    .pub-title {
+      font-family: 'Roboto Slab', serif;
+      font-size: 1.05rem;
+      font-weight: 500;
+      margin: 0 0 .3rem 0;
+      line-height: 1.35;
+    }
+    .pub-authors { font-size: .94rem; color: var(--text); margin-bottom: .4rem; }
+    .pub-authors .me { font-weight: 700; }
+    .pub-meta { font-size: .9rem; color: var(--muted); font-style: italic; margin-bottom: .5rem; }
+    .pub-links a {
+      display: inline-block;
+      font-size: .78rem;
+      font-weight: 500;
+      padding: .15rem .55rem;
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      margin-right: .4rem;
+      color: var(--text);
+    }
+    .pub-links a:hover { background: var(--accent); color: white; border-color: var(--accent); }
+    @media (max-width: 720px) {
+      .pub { grid-template-columns: 1fr; }
+      .pub-thumb { width: 100%; height: 120px; }
+    }
+
+    /* ---------- EXPERIENCE BLOCKS ---------- */
+    .exp { padding: 1.1rem 0; border-top: 1px solid var(--border); }
+    .exp:last-child { border-bottom: 1px solid var(--border); }
+    .exp-header { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; flex-wrap: wrap; margin-bottom: .35rem; }
+    .exp-role { font-family: 'Roboto Slab', serif; font-weight: 500; font-size: 1.02rem; }
+    .exp-date { color: var(--muted); font-size: .9rem; font-family: 'Roboto Slab', serif; white-space: nowrap; }
+    .exp-org { color: var(--muted); font-size: .94rem; margin-bottom: .4rem; }
+    .exp p { margin: .35rem 0 0 0; font-size: .96rem; }
+
+    /* ---------- SKILLS ---------- */
+    .chip-row { display: flex; flex-wrap: wrap; gap: .45rem; margin-top: .5rem; }
+    .chip {
+      font-size: .82rem;
+      padding: .25rem .65rem;
+      border-radius: 14px;
+      background: var(--code-bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    /* ---------- FOOTER ---------- */
+    footer {
+      max-width: 920px;
+      margin: 3rem auto 0;
+      padding: 2rem 1.5rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--muted);
+      font-size: .88rem;
+    }
+    .social { display: flex; justify-content: center; gap: 1.1rem; margin-bottom: 1rem; font-size: 1.2rem; }
+    .social a { color: var(--muted); }
+    .social a:hover { color: var(--accent); }
+
+    .note {
+      font-size: .85rem;
+      color: var(--muted);
+      font-style: italic;
+      margin-top: .3rem;
+    }
+  </style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="nav-brand" href="#">Rebecca (Yuxin) Bao</a>
+    <div class="nav-links">
+      <a class="current" href="#about">about</a>
+      <a href="#news">news</a>
+      <a href="#publications">publications</a>
+      <a href="#experience">experience</a>
+      <a href="#skills">skills</a>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <i class="fas fa-moon"></i>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<main>
+
+  <section class="hero" id="about">
+    <div class="hero-text">
+      <h1>Rebecca (Yuxin) Bao</h1>
+      <div class="tag">Undergraduate Researcher · UCLA Computer Science</div>
+
+      <p>
+        I am a third-year Computer Science undergraduate at the
+        <a href="https://www.ucla.edu/">University of California, Los Angeles (UCLA)</a>,
+        currently working as a research assistant at the
+        <a href="https://boleizhou.github.io/">VAIL Lab</a> with
+        <a href="https://boleizhou.github.io/">Prof. Bolei Zhou</a> and at the
+        <a href="https://mobility-lab.seas.ucla.edu/">UCLA Mobility Lab</a> with
+        <a href="https://mobility-lab.seas.ucla.edu/about/">Prof. Jiaqi Ma</a>.
+      </p>
+      <p>
+        My research focuses on
+        <strong>end-to-end autonomous driving</strong>,
+        <strong>simulation-to-real evaluation</strong>, and
+        <strong>cooperative perception</strong> for intelligent transportation systems.
+        I am especially interested in bridging the open-loop / closed-loop gap that limits how well learned driving policies transfer from training datasets to deployment-time environments.
+      </p>
+      <p>
+        Outside research, I work on robotics systems engineering (ROS1/2, LiDAR &amp; camera pipelines), care a lot about clean production-ready code, and enjoy 3D printing, traditional Chinese painting, and classical guitar.
+      </p>
+    </div>
+    <div class="avatar" aria-label="Rebecca Bao profile photo placeholder">RB</div>
+  </section>
+
+  <section id="news">
+    <h2><a href="#news">news</a></h2>
+    <table class="news-table">
+      <tbody>
+        <tr>
+          <td class="news-date">Apr 22, 2026</td>
+          <td>Submitted <em>BridgeSim: Unveiling the OL-CL Gap in End-to-End Autonomous Driving</em> to <strong>CoRL 2026</strong> as co-author. Owned end-to-end integration of <a href="https://github.com/VAIL-UCLA/BridgeSim">Alpamayo and OpenPilot</a> into the unified model zoo.</td>
+        </tr>
+        <tr>
+          <td class="news-date">Mar 28, 2026</td>
+          <td>Shipped TTC (Time-to-Collision) metric fix and TTC-based trajectory scorers in BridgeSim, supporting fair closed-loop benchmarking across 12+ E2E driving models.</td>
+        </tr>
+        <tr>
+          <td class="news-date">Feb 2026</td>
+          <td>Manuscript <em>RFuse: Query-Based Cross-Voxel Cross-Agent Fusion for Sparse Radar Representations</em> submitted to <strong>Transportation Research Part C</strong> (TRC-26-00024).</td>
+        </tr>
+        <tr>
+          <td class="news-date">Sep 1, 2025</td>
+          <td>Joined the <a href="https://boleizhou.github.io/">VAIL Lab</a> at UCLA as a research assistant working on the BridgeSim closed-loop evaluation platform.</td>
+        </tr>
+        <tr>
+          <td class="news-date">Aug 2025</td>
+          <td>Paper <em>CDA-SimBoost</em> accepted at <strong>IEEE ITSC 2025</strong>.</td>
+        </tr>
+        <tr>
+          <td class="news-date">Jun 2025</td>
+          <td>Selected as a <a href="https://samueli.ucla.edu/">Samueli Research Scholar (SRS)</a> at the UCLA Mobility Lab — building a CARLA → ROS real-time streaming pipeline and a cooperative driving dataset on top of OpenCDA-InfraX.</td>
+        </tr>
+        <tr>
+          <td class="news-date">Jan 2025</td>
+          <td>Joined the UCLA Mobility Lab and the Sensing &amp; Robotics for Infrastructure (SRI) Lab as a research assistant.</td>
+        </tr>
+        <tr>
+          <td class="news-date">2024</td>
+          <td>Named to the <strong>UCLA Dean's Honor List</strong>; GPA 3.940 / 4.000.</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section id="publications">
+    <h2><a href="#publications">selected publications</a></h2>
+    <ul class="pub-list">
+
+      <li class="pub">
+        <div class="pub-thumb bridgesim">BridgeSim</div>
+        <div>
+          <span class="pub-venue">UNDER REVIEW · CoRL 2026</span>
+          <div class="pub-title">BridgeSim: Unveiling the OL-CL Gap in End-to-End Autonomous Driving</div>
+          <div class="pub-authors">
+            Seth Z. Zhao*, Luobin Wang*, Abhijit Ravichandran,
+            <span class="me">Yuxin Bao</span>, Ziyang Leng, Honglin He, Zewei Zhou, Xu Han, et al., Bolei Zhou
+          </div>
+          <div class="pub-meta">Cross-simulator closed-loop evaluation platform for end-to-end driving policies, built on MetaDrive.</div>
+          <div class="pub-links">
+            <a href="https://github.com/VAIL-UCLA/BridgeSim">Code</a>
+            <a href="https://vail-ucla.github.io/BridgeSim/">Project</a>
+            <a href="https://huggingface.co/sethzhao506ucla/BridgeSim">HF Checkpoints</a>
+          </div>
+        </div>
+      </li>
+
+      <li class="pub">
+        <div class="pub-thumb cda">CDA-SimBoost</div>
+        <div>
+          <span class="pub-venue">IEEE ITSC 2025</span>
+          <div class="pub-title">CDA-SimBoost: A Unified Framework Bridging Real Data and Simulation for Infrastructure-Based CDA Systems</div>
+          <div class="pub-authors">
+            Z. Zheng*, X. Han*, <span class="me">Y. Bao</span>, Y. Zhang, J. Liu, Z. Meng, X. Xia, J. Ma
+          </div>
+          <div class="pub-meta">In <em>IEEE International Conference on Intelligent Transportation Systems (ITSC)</em>, 2025.</div>
+        </div>
+      </li>
+
+      <li class="pub">
+        <div class="pub-thumb rfuse">RFuse</div>
+        <div>
+          <span class="pub-venue">UNDER REVIEW · TRC 2026</span>
+          <div class="pub-title">RFuse: Query-Based Cross-Voxel Cross-Agent Fusion for Sparse Radar Representations</div>
+          <div class="pub-authors">
+            Z. Meng, Z. Zheng, <span class="me">Y. Bao</span>, J. Liu, J. Ma
+          </div>
+          <div class="pub-meta">Submitted to <em>Transportation Research Part C</em>, manuscript TRC-26-00024.</div>
+        </div>
+      </li>
+
+      <li class="pub">
+        <div class="pub-thumb live2sim">Live2Sim</div>
+        <div>
+          <span class="pub-venue">UCLA SURP 2025</span>
+          <div class="pub-title">Live2Sim &amp; V2X_UCLA: Bridging Live Sensing and Simulation for Cooperative Autonomous Driving</div>
+          <div class="pub-authors"><span class="me">Yuxin Bao</span></div>
+          <div class="pub-meta">UCLA Summer Undergraduate Research Program (SURP), 2025.</div>
+        </div>
+      </li>
+
+    </ul>
+  </section>
+
+  <section id="experience">
+    <h2><a href="#experience">research experience</a></h2>
+
+    <div class="exp">
+      <div class="exp-header">
+        <div class="exp-role">Research Assistant, VAIL Lab</div>
+        <div class="exp-date">Sep 2025 – Present</div>
+      </div>
+      <div class="exp-org">UCLA · advised by Prof. Bolei Zhou</div>
+      <p>Developing and integrating a unified model zoo of 12+ end-to-end driving models (UniAD, VAD, TCP, RAP, LEAD, TransFuser, DiffusionDrive, OpenPilot, Alpamayo R1, …) into <a href="https://github.com/VAIL-UCLA/BridgeSim">BridgeSim</a>, a cross-simulator closed-loop evaluation platform. Owned end-to-end integration of OpenPilot and Alpamayo via merged PRs; extended the evaluation framework with TTC metric fixes and TTC-based trajectory scorers; refactored Alpamayo inference for per-frame process reuse.</p>
+    </div>
+
+    <div class="exp">
+      <div class="exp-header">
+        <div class="exp-role">Samueli Research Scholar, Mobility Lab</div>
+        <div class="exp-date">Jun 2025 – Sep 2025</div>
+      </div>
+      <div class="exp-org">UCLA · UCLA SRS Program</div>
+      <p>Designed and implemented a ROS-based real-time streaming pipeline for CARLA simulators via ROS bridge, enabling online ingestion, detection, tracking, and integration of vehicle sensor data. Built a cooperative driving dataset on top of OpenCDA-InfraX with broader multi-modal coverage and more diverse traffic scenarios than existing benchmarks.</p>
+    </div>
+
+    <div class="exp">
+      <div class="exp-header">
+        <div class="exp-role">Research Assistant, Mobility Lab</div>
+        <div class="exp-date">Jan 2025 – Sep 2025</div>
+      </div>
+      <div class="exp-org">UCLA · advised by Prof. Jiaqi Ma</div>
+      <p>Contributed to development and debugging of CDA-SimBoost, a Python framework integrating real-world data with CARLA simulation for cooperative driving research. Built a ROS1 / C++ localization tool for point-cloud matching; authored a ROS1 package for autonomous vehicles with central LiDAR (binary → point cloud → RViz alignment via ground-truth pose), plus a companion node converting sequential YAML bounding-box annotations into RViz Marker/MarkerArray messages with Euler-to-quaternion transforms.</p>
+    </div>
+
+    <div class="exp">
+      <div class="exp-header">
+        <div class="exp-role">Research Assistant, SRI Lab</div>
+        <div class="exp-date">Jan 2025 – Apr 2025</div>
+      </div>
+      <div class="exp-org">UCLA · Sensing &amp; Robotics for Infrastructure</div>
+      <p>Co-developed a robotic system for autonomous field search and environmental analysis in forests, integrating 3D LiDAR, ZED 2 camera, and Impinj R420 reader with ROS2 and the ZED SDK. Wrote ROS nodes in Python for SVO-based YOLO perception (tree / rock counts, terrain type → structured Excel datasets) and live GPS serial parsing (timestamp, coordinates, speed).</p>
+    </div>
+
+  </section>
+
+  <section id="skills">
+    <h2><a href="#skills">skills</a></h2>
+    <p style="margin-top:0; color:var(--muted); font-size:.95rem;">A short list of what I most often reach for:</p>
+    <div class="chip-row">
+      <span class="chip">Python</span>
+      <span class="chip">C++</span>
+      <span class="chip">PyTorch</span>
+      <span class="chip">ROS1 / ROS2</span>
+      <span class="chip">CARLA</span>
+      <span class="chip">MetaDrive</span>
+      <span class="chip">RViz</span>
+      <span class="chip">LiDAR pipelines</span>
+      <span class="chip">YOLO / Detection</span>
+      <span class="chip">MMDetection3D</span>
+      <span class="chip">OpenCV</span>
+      <span class="chip">Git / GitHub</span>
+      <span class="chip">React.js</span>
+      <span class="chip">Node.js</span>
+      <span class="chip">Verilog</span>
+      <span class="chip">Haskell</span>
+      <span class="chip">Lisp</span>
+      <span class="chip">3D CAD (Shapr3D)</span>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="social">
+    <a href="mailto:c13752hz@g.ucla.edu" title="Email"><i class="fas fa-envelope"></i></a>
+    <a href="https://github.com/c13752hz" title="GitHub"><i class="fab fa-github"></i></a>
+    <a href="https://www.linkedin.com/in/rebecca-bao-c13752hz" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+    <a href="https://scholar.google.com/" title="Google Scholar"><i class="fas fa-graduation-cap"></i></a>
+  </div>
+  <div>© 2026 Rebecca (Yuxin) Bao. Built with vanilla HTML / CSS — inspired by <a href="https://github.com/alshedivat/al-folio">al-folio</a>.</div>
+  <div class="note">Last updated May 2026. Photos and academic content are placeholders — swap in your own when ready.</div>
+</footer>
+
+<script>
+  // ----- Theme toggle (persists in localStorage when available) -----
+  const root = document.documentElement;
+  const btn = document.getElementById('themeToggle');
+  const icon = btn.querySelector('i');
+
+  function applyTheme(t) {
+    if (t === 'dark') {
+      root.setAttribute('data-theme', 'dark');
+      icon.className = 'fas fa-sun';
+    } else {
+      root.removeAttribute('data-theme');
+      icon.className = 'fas fa-moon';
+    }
+  }
+
+  let stored = null;
+  try { stored = localStorage.getItem('theme'); } catch (e) {}
+  if (!stored && window.matchMedia('(prefers-color-scheme: dark)').matches) stored = 'dark';
+  applyTheme(stored);
+
+  btn.addEventListener('click', () => {
+    const isDark = root.getAttribute('data-theme') === 'dark';
+    const next = isDark ? 'light' : 'dark';
+    applyTheme(next);
+    try { localStorage.setItem('theme', next); } catch (e) {}
+  });
+
+  // ----- Smooth scroll for in-page anchor links -----
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const id = a.getAttribute('href').slice(1);
+      const el = document.getElementById(id);
+      if (!el) return;
+      e.preventDefault();
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      history.replaceState(null, '', '#' + id);
+    });
+  });
+</script>
+
+</body>
 </html>
